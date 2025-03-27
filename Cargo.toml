@@ -1,0 +1,20 @@
+[workspace]
+members = [
+  "arithmetic",
+  "hyperpianist",
+  "subroutines",
+  "transcript",
+  "util",
+  "deDory",
+  "deNetwork"
+]
+
+[patch.crates-io]
+ark-ff = { path = "third_party/algebra/ff" }
+ark-ec = { path = "third_party/algebra/ec" }
+ark-serialize = { path = "third_party/algebra/serialize" }
+ark-bn254 = { path = "third_party/curves/bn254" }
+
+[profile.release]
+lto = "fat"
+panic = "abort"
