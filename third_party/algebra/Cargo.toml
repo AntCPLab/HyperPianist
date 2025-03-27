@@ -1,0 +1,45 @@
+[workspace]
+
+members = [
+    "serialize",
+    "serialize-derive",
+
+    "ff-macros",
+    "ff-asm",
+    "ff",
+
+    "ec",
+    "bench-templates",
+
+    "poly",
+    "test-curves",
+    "test-templates",
+]
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+incremental = true
+panic = 'abort'
+
+[profile.bench]
+opt-level = 3
+debug = false
+rpath = false
+lto = "thin"
+incremental = true
+debug-assertions = false
+
+[profile.dev]
+opt-level = 0
+panic = 'abort'
+
+[profile.test]
+opt-level = 3
+lto = "thin"
+incremental = true
+debug-assertions = true
+debug = true
+
+[workspace.metadata.release]
+dependent-version = "fix"
