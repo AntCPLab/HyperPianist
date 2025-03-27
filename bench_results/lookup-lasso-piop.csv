@@ -1,0 +1,6 @@
+nv,scheme,prover_time,verifier_time,proof_size
+20,lasso,4223595,230,7020
+21,lasso,7777810,238,7196
+22,lasso,15176266,246,7372
+23,lasso,29568364,254,7548
+24,lasso,57943329,260,7724

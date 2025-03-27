@@ -1,0 +1,6 @@
+nv,scheme,prover_time,verifier_time,proof_size_compressed,proof_size_uncompressed
+20,hyperpianist,2128826,599,8424,8968
+21,hyperpianist,4267363,624,8664,9208
+22,hyperpianist,8003223,626,8904,9448
+23,hyperpianist,16155947,634,9144,9688
+24,hyperpianist,31984422,650,9384,9928

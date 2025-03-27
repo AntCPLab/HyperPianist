@@ -1,0 +1,114 @@
+[package]
+name = "subroutines"
+version = "0.1.0"
+edition = "2021"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+arithmetic = { path = "../arithmetic" }
+deNetwork = { path = "../deNetwork" }
+ark-bls12-381 = { version = "0.4.0", default-features = false, features = [ "curve" ] }
+ark-ec = { version = "^0.4.0", default-features = false }
+ark-ff = { version = "^0.4.0", default-features = false, features = ["asm"] }
+ark-poly = { version = "^0.4.0", default-features = false }
+ark-serialize =  { version = "^0.4.0", default-features = false }
+ark-std = { version = "^0.4.0", default-features = false }
+derivative = { version = "2", features = ["use_core"] }
+displaydoc = { version = "0.2.3", default-features = false }
+enum_dispatch = "0.3.13"
+fixedbitset = "0.5.7"
+itertools = { version = "0.11.0", optional = true }
+rand = "0.8.5"
+rand_chacha = { version = "0.3.0", default-features = false }
+rand_core = "0.6.4"
+rayon = { version = "1.5.2", default-features = false, optional = true }
+serde = { version = "1.0.209", features = ["derive"] }
+strum = "0.26.3"
+transcript = { path = "../transcript" }
+util = { path = "../util" }
+# # Benchmarks
+# [[bench]]
+# name = "poly-iop-benches"
+# path = "benches/iop_bench.rs"
+# harness = false
+deDory = { path = "../deDory" }
+
+# Benchmarks
+[[bench]]
+name = "pcs-benches"
+path = "benches/pcs_bench.rs"
+harness = false
+
+[[example]]
+name = "dSumcheck"
+path = "dTests/dSumcheck.rs"
+
+[[example]]
+name = "dZerocheck"
+path = "dTests/dZerocheck.rs"
+
+[[example]]
+name = "dPermcheck"
+path = "dTests/dPermcheck.rs"
+
+[[example]]
+name = "dRationalSumcheck"
+path = "dTests/dRationalSumcheck.rs"
+
+[[example]]
+name = "dRationalSumcheckPIOP"
+path = "dTests/dRationalSumcheckPIOP.rs"
+required-features = ["rational_sumcheck_piop"]
+
+[[example]]
+name = "dMultiRationalSumcheck"
+path = "dTests/dMultiRationalSumcheck.rs"
+
+[[example]]
+name = "dLookup"
+path = "dTests/dLookup.rs"
+
+[[example]]
+name = "dCombinedCheck"
+path = "dTests/dCombinedCheck.rs"
+
+[[example]]
+name = "lookup_bench"
+path = "dTests/lookup_bench.rs"
+
+[[example]]
+name = "deDory"
+path = "dTests/deDory.rs"
+
+[[example]]
+name = "deMkzg"
+path = "dTests/deMkzg.rs"
+
+[[example]]
+name = "deNetwork"
+path = "dTests/deNetwork.rs"
+
+[features]
+# default = [ "parallel", "print-trace" ]
+default = ["parallel", "rational_sumcheck_piop" ]
+# extensive sanity checks that are useful for debugging
+extensive_sanity_checks = [ ]
+parallel = [ 
+    "rayon",
+    "itertools",
+    "ark-std/parallel", 
+    "ark-ff/parallel",  
+    "ark-poly/parallel", 
+    "ark-ec/parallel",
+    "util/parallel",
+    "arithmetic/parallel",
+    ]
+print-trace = [ 
+    "arithmetic/print-trace",
+    "ark-std/print-trace",
+    ] 
+rational_sumcheck_piop = []
+
+[dev-dependencies]
+structopt = { version = "0.3" }
+ark-bn254 = { version = "0.4.0", features = ["asm"] }

@@ -1,0 +1,11 @@
+Time: microseconds (us)
+Comm: bytes
+Memory: kbytes
+Proof size: bytes
+
+Hyperpianist: All time measurements taken as the average of 20, 10 or 5 runs.
+(nv - log_2 (parties) <= 20: 20 runs, <= 22: 10 runs, >= 23: 5 runs)
+
+HyperPlonk & Pianist: All time measurements taken as the average of 10, 5, or 3 runs.
+
+Lookup: nv refers to log2 of the number of instructions. All time measurements taken as the average of 10 runs.
