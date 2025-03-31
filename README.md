@@ -1,5 +1,5 @@
 # HyperPianist
-Implementation of *HyperPianist: Pianist with Linear-Time Prover and Logarithmic Communication Cost (SP2025)*.
+Implementation of [HyperPianist: Pianist with Linear-Time Prover and Logarithmic Communication Cost (SP2025)](https://eprint.iacr.org/2024/1273).
 This is an optimized, fully distributed version of [HyperPlonk](https://github.com/EspressoSystems/hyperplonk).
 
 This is the PIOP version. For the layered circuit version, check out the other branch.
