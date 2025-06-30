@@ -63,6 +63,7 @@ pub trait VariableBaseMSM: ScalarMul {
 
         let num_chunks = (num_tasks + digits_count - 1) / digits_count;
         let chunk_size = (size + num_chunks - 1) / num_chunks;
+        let num_chunks = (size + chunk_size - 1) / chunk_size;
 
         let (sender, receiver) = std::sync::mpsc::sync_channel(num_chunks);
         let mut sum = Self::zero();

@@ -82,3 +82,8 @@ pub(super) fn test_rng() -> StdRng {
     seed[0] = Net::party_id() as u8;
     rand::rngs::StdRng::from_seed(seed)
 }
+
+pub(super) fn test_rng_deterministic() -> StdRng {
+    let seed = [69u8; 32];
+    rand::rngs::StdRng::from_seed(seed)
+}

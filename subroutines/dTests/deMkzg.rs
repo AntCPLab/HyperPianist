@@ -5,15 +5,16 @@ use ark_ff::UniformRand;
 use ark_poly::{DenseMultilinearExtension, MultilinearExtension};
 use rand::Rng;
 use std::{iter::zip, sync::Arc};
-use subroutines::pcs::prelude::{ 
-    MultilinearProverParam, MultilinearUniversalParams, MultilinearVerifierParam, DeMkzg, DeMkzgSRS, PCSError, MultilinearKzgProof, PolynomialCommitmentScheme
+use subroutines::pcs::prelude::{
+    DeMkzg, DeMkzgSRS, MultilinearKzgProof, MultilinearProverParam, MultilinearUniversalParams,
+    MultilinearVerifierParam, PCSError, PolynomialCommitmentScheme,
 };
 use transcript::IOPTranscript;
 
 use deNetwork::{DeMultiNet as Net, DeNet, DeSerNet};
 
 mod common;
-use common::{d_evaluate_mle, test_rng};
+use common::{d_evaluate_mle, test_rng, test_rng_deterministic};
 
 fn test_single_helper<E: Pairing, R: Rng>(
     params: &DeMkzgSRS<E>,
@@ -136,17 +137,9 @@ fn test_multi_helper<E: Pairing, R: Rng>(
 fn test_multi<E: Pairing>() -> Result<(), PCSError> {
     let mut rng = test_rng();
 
-    let params = if Net::am_master() {
-        let params = DeMkzg::<E>::gen_srs_for_testing(&mut rng, 6 + Net::n_parties().log_2())?;
-        let pp  = match &params {
-            DeMkzgSRS::Unprocessed(pp) => pp,
-            _ => panic!("Unexpected processed"),
-        };
-        Net::recv_from_master_uniform(Some(pp.clone()));
-        params
-    } else {
-        DeMkzgSRS::Unprocessed(Net::recv_from_master_uniform(None))
-    };
+    let mut srs_rng = test_rng_deterministic();
+    let params =
+        DeMkzg::<Bls12_381>::gen_srs_for_testing(&mut srs_rng, 6 + Net::n_parties().log_2()).unwrap();
     for num_poly in 4..6 {
         for nv in 4..6 {
             let polys1: Vec<_> = (0..num_poly)
